@@ -40,9 +40,12 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         //TODO: Register your MessageCell.xib file here:
         messageTableView.register(UINib(nibName: "MessageCell", bundle: nil), forCellReuseIdentifier: "customMessageCell")
+        messageTableView.register(UINib(nibName: "MessageCell1", bundle: nil), forCellReuseIdentifier: "customMessageCell1")
         configureTableView()
         retrieveMessages()
         messageTableView.separatorStyle = .none
+        
+        
     }
 
     ///////////////////////////////////////////
@@ -53,20 +56,36 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     //TODO: Declare cellForRowAtIndexPath here:
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "customMessageCell", for: indexPath) as! CustomMessageCell
         cell.messageBody.text = messageArray[indexPath.row].messageBody
         cell.senderUsername.text = messageArray[indexPath.row].sender
         cell.avatarImageView.image = UIImage(named: "egg")
-        
-        //Change Cell Color of Current User
+
         if cell.senderUsername.text == Auth.auth().currentUser?.email as String! {
-            cell.messageBackground.backgroundColor = UIColor.flatMint()
-            cell.avatarImageView.backgroundColor = UIColor.flatWhite()
+            let cells = tableView.dequeueReusableCell(withIdentifier: "customMessageCell1", for: indexPath) as! CustomMessageCell
+            cells.messageBody.text = messageArray[indexPath.row].messageBody
+            cells.senderUsername.text = messageArray[indexPath.row].sender
+            cells.avatarImageView.image = UIImage(named: "egg")
+            cells.messageBackground.backgroundColor = UIColor.flatMint()
+            cells.avatarImageView.backgroundColor = UIColor.flatWhite()
+            return cells
         } else {
             cell.messageBackground.backgroundColor = UIColor.flatTeal()
             cell.avatarImageView.backgroundColor = UIColor.flatGray()
+            return cell
         }
-        return cell
+        
+//        //Change Cell Color of Current User
+//        if cell.senderUsername.text == Auth.auth().currentUser?.email as String! {
+//            cell.messageBackground.backgroundColor = UIColor.flatMint()
+//            cell.avatarImageView.backgroundColor = UIColor.flatWhite()
+//        } else {
+//            cell.messageBackground.backgroundColor = UIColor.flatTeal()
+//            cell.avatarImageView.backgroundColor = UIColor.flatGray()
+//
+//        }
+//        return cell
     }
 
     
