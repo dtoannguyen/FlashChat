@@ -45,9 +45,9 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         retrieveMessages()
         messageTableView.separatorStyle = .none
         
-        
     }
-
+    
+    
     ///////////////////////////////////////////
     
     
@@ -76,16 +76,6 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             return cell
         }
         
-//        //Change Cell Color of Current User
-//        if cell.senderUsername.text == Auth.auth().currentUser?.email as String! {
-//            cell.messageBackground.backgroundColor = UIColor.flatMint()
-//            cell.avatarImageView.backgroundColor = UIColor.flatWhite()
-//        } else {
-//            cell.messageBackground.backgroundColor = UIColor.flatTeal()
-//            cell.avatarImageView.backgroundColor = UIColor.flatGray()
-//
-//        }
-//        return cell
     }
 
     
@@ -184,6 +174,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.messageArray.append(message)
             self.configureTableView()
             self.messageTableView.reloadData()
+            
         }
     }
     
@@ -196,5 +187,4 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             print("error")
         }
     }
-
 }
